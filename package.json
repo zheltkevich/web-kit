@@ -29,8 +29,9 @@
         "lint:fix": "npm run lint:js && npm run lint:css",
         "lint:check": "eslint -c ./eslint.config.js && stylelint \"**/*.{css,scss,vue}\"",
         "format": "prettier --write . --ignore-path .prettierignore",
-        "build": "vite build && cp -R src/lib/scss dist/  && cp -R src/lib/assets/fonts dist/fonts/",
-        "preview-lib": "vite preview"
+        "build": "vite build",
+        "build:lib": "vite build && cp -R src/lib/scss dist/  && cp -R src/lib/assets/fonts dist/fonts/",
+        "preview:lib": "vite preview"
     },
     "lint-staged": {
         "*.{js,vue}": "npm run lint:js",
