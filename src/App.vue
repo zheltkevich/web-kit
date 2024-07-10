@@ -11,6 +11,7 @@ import HelloWorld from './components/HelloWorld.vue'
             src="@/assets/logo.svg"
             width="125"
             height="125" />
+        <ui-example />
 
         <div class="wrapper">
             <HelloWorld msg="You did it!" />
