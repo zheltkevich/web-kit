@@ -1,6 +1,31 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+import { useRouter } from 'vue-router'
+import { reactive, watch, onBeforeMount } from 'vue'
+
+const $router = useRouter()
+
+const items = reactive([])
+
+onBeforeMount(async () => {
+    const instuctions = import.meta.glob('@lib/components/**/*.instruction.js')
+
+    Object.values(instuctions).forEach(async getInstruction => {
+        const instruction = await getInstruction()
+        items.push(instruction.default)
+    })
+})
+
+watch(items, items => {
+    items.forEach(item => {
+        $router.addRoute({
+            path: `/${item.name}`,
+            name: item.name,
+            component: HelloWorld,
+        })
+    })
+})
 </script>
 
 <template>
@@ -19,7 +44,12 @@ import HelloWorld from './components/HelloWorld.vue'
 
             <nav>
                 <RouterLink to="/">Home</RouterLink>
-                <RouterLink to="/about">About</RouterLink>
+                <!-- <RouterLink
+                    :to="{
+                        name: 'ui-button',
+                    }">
+                    Home
+                </RouterLink> -->
             </nav>
         </div>
     </header>
