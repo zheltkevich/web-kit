@@ -12,6 +12,7 @@ import HelloWorld from './components/HelloWorld.vue'
             width="125"
             height="125" />
         <ui-example />
+        <ui-button />
 
         <div class="wrapper">
             <HelloWorld msg="You did it!" />
