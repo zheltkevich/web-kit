@@ -5,10 +5,41 @@ import { createPinia } from 'pinia'
 import '@lib'
 
 import App from './App.vue'
-import router from './router'
+import { createRouter, createWebHistory } from 'vue-router'
+import HomeView from '@/views/HomeView.vue'
+import ComponentView from '@/views/ComponentView.vue'
 
-const app = createApp(App)
+const router = createRouter({
+    history: createWebHistory(import.meta.env.BASE_URL),
+    routes: [
+        {
+            path: '/',
+            name: 'home',
+            component: HomeView,
+        },
+    ],
+})
 
-app.use(createPinia())
-app.use(router)
-app.mount('#app')
+async function loadAndAddRoutes() {
+    const instructions = import.meta.glob('@lib/components/**/*.instruction.js')
+    for (const path in instructions) {
+        const module = await instructions[path]()
+        if (module.default) {
+            router.addRoute({
+                path: `/${module.default.name}`,
+                name: module.default.name,
+                component: ComponentView,
+            })
+        }
+    }
+}
+
+async function initializeApp() {
+    await loadAndAddRoutes()
+    const app = createApp(App)
+    app.use(createPinia())
+    app.use(router)
+    app.mount('#app')
+}
+
+initializeApp()

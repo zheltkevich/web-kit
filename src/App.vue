@@ -1,9 +1,10 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
-import { useInstructions } from '@/composables/useInstructions.js'
+import { useRouter } from 'vue-router'
 
-const { items } = useInstructions()
+const $router = useRouter()
+const routes = $router.getRoutes()
 </script>
 
 <template>
@@ -18,9 +19,8 @@ const { items } = useInstructions()
         <div class="wrapper">
             <HelloWorld msg="You did it!" />
             <nav>
-                <RouterLink to="/">Home</RouterLink>
                 <RouterLink
-                    v-for="route in items"
+                    v-for="route in routes"
                     :key="route.name"
                     :to="{ name: route.name }">
                     {{ route.name }}
