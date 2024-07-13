@@ -29,7 +29,8 @@ const $emit = defineEmits(['toggle'])
             <RouterLink
                 v-for="route in routes"
                 :key="route.name"
-                :to="{ name: route.name }">
+                :to="{ name: route.name }"
+                @click="toggle">
                 {{ route.name }}
             </RouterLink>
         </nav>

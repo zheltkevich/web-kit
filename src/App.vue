@@ -29,6 +29,7 @@ const changeVisibility = val => {
     display: grid;
     grid-template-rows: auto 1fr auto; /* header и main */
     grid-template-columns: 1fr; /* Навигацию убираем из потока для мобильных */
+    overflow: hidden;
     height: 100vh;
 
     @media (width > 768px) {

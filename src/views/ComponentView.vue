@@ -1,5 +1,12 @@
-<script setup></script>
+<script setup>
+defineProps({
+    instruction: {
+        type: Object,
+        required: true,
+    },
+})
+</script>
 
 <template>
-    <article>Component View</article>
+    <article>{{ instruction }}</article>
 </template>

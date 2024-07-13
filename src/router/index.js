@@ -22,6 +22,9 @@ const updateRoutes = async () => {
                 path: `/${module.default.name}`,
                 name: module.default.name,
                 component: ComponentView,
+                props: {
+                    instruction: module.default,
+                },
             })
         }
     }
