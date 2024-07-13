@@ -2,8 +2,8 @@
 
 <template>
     <header class="app-header">
-        <h1>Web-Kit</h1>
-        <div>Header content</div>
+        <span class="app-header__logo">Web-Kit</span>
+        <div class="app-header__scheme-switcher">Change scheme</div>
     </header>
 </template>
 
