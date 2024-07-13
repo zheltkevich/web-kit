@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import AppHeader from '@/components/app/AppHeader.vue'
 import AppNav from '@/components/app/AppNav.vue'
@@ -7,19 +6,11 @@ import AppMain from '@/components/app/AppMain.vue'
 
 const $router = useRouter()
 const routes = $router.getRoutes()
-const navigationVisible = ref(false)
-
-const changeVisibility = val => {
-    navigationVisible.value = val
-}
 </script>
 
 <template>
     <AppHeader />
-    <AppNav
-        :class="{ visible: navigationVisible }"
-        :routes="routes"
-        @toggle="changeVisibility" />
+    <AppNav :routes="routes" />
     <AppMain />
 </template>
 

@@ -1,27 +1,32 @@
 <script setup>
-import { ref } from 'vue'
-defineProps({
+import { ref, computed } from 'vue'
+import { useWindowSize } from '@vueuse/core'
+const props = defineProps({
     routes: {
         type: Array,
         required: true,
     },
+    collapsedHeight: {
+        type: Number,
+        default: 60,
+    },
 })
 
 const navigationVisible = ref(false)
-const toggle = () => {
-    navigationVisible.value = !navigationVisible.value
-    $emit('toggle', navigationVisible.value)
-    if (navigationVisible.value) navigationHeight.value = document.body.offsetHeight
-    else navigationHeight.value = 60
-}
-const navigationHeight = ref(60)
-const $emit = defineEmits(['toggle'])
+const toggle = () => (navigationVisible.value = !navigationVisible.value)
+
+const { height } = useWindowSize()
+const navigationStyles = computed(() => {
+    return {
+        height: navigationVisible.value ? `${height.value}px` : `${props.collapsedHeight}px`,
+    }
+})
 </script>
 
 <template>
     <aside
         class="app-nav"
-        :style="{ height: navigationHeight + 'px' }">
+        :style="navigationStyles">
         <header class="app-nav__header">
             <h3>navigation</h3>
             <button
@@ -57,12 +62,7 @@ const $emit = defineEmits(['toggle'])
         position: static;
         grid-row: 2;
         grid-column: 1;
-        /* stylelint-disable-next-line declaration-no-important */
-        height: 100% !important;
-    }
-
-    &.visible {
-        height: 100%;
+        height: 100% !important; // stylelint-disable-line declaration-no-important
     }
 
     &__header {
