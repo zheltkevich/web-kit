@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import ComponentView from '@/views/ComponentView.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,4 +13,21 @@ const router = createRouter({
     ],
 })
 
-export default router
+const updateRoutes = async () => {
+    const instructions = import.meta.glob('@lib/components/**/*.instruction.js')
+    for (const path in instructions) {
+        const module = await instructions[path]()
+        if (module.default) {
+            router.addRoute({
+                path: `/${module.default.name}`,
+                name: module.default.name,
+                component: ComponentView,
+            })
+        }
+    }
+}
+
+export const initRouter = async () => {
+    await updateRoutes()
+    return router
+}
