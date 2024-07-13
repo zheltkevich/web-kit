@@ -1,31 +1,9 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
-import { useRouter } from 'vue-router'
-import { reactive, watch, onBeforeMount } from 'vue'
+import { useInstructions } from '@/composables/useInstructions.js'
 
-const $router = useRouter()
-
-const items = reactive([])
-
-onBeforeMount(async () => {
-    const instuctions = import.meta.glob('@lib/components/**/*.instruction.js')
-
-    Object.values(instuctions).forEach(async getInstruction => {
-        const instruction = await getInstruction()
-        items.push(instruction.default)
-    })
-})
-
-watch(items, items => {
-    items.forEach(item => {
-        $router.addRoute({
-            path: `/${item.name}`,
-            name: item.name,
-            component: HelloWorld,
-        })
-    })
-})
+const { items } = useInstructions()
 </script>
 
 <template>
@@ -36,20 +14,17 @@ watch(items, items => {
             src="@/assets/logo.svg"
             width="125"
             height="125" />
-        <ui-example />
         <ui-button />
-
         <div class="wrapper">
             <HelloWorld msg="You did it!" />
-
             <nav>
                 <RouterLink to="/">Home</RouterLink>
-                <!-- <RouterLink
-                    :to="{
-                        name: 'ui-button',
-                    }">
-                    Home
-                </RouterLink> -->
+                <RouterLink
+                    v-for="route in items"
+                    :key="route.name"
+                    :to="{ name: route.name }">
+                    {{ route.name }}
+                </RouterLink>
             </nav>
         </div>
     </header>
