@@ -11,12 +11,17 @@ const navigationVisible = ref(false)
 const toggle = () => {
     navigationVisible.value = !navigationVisible.value
     $emit('toggle', navigationVisible.value)
+    if (navigationVisible.value) navigationHeight.value = document.body.offsetHeight
+    else navigationHeight.value = 60
 }
+const navigationHeight = ref(60)
 const $emit = defineEmits(['toggle'])
 </script>
 
 <template>
-    <aside class="app-nav">
+    <aside
+        class="app-nav"
+        :style="{ height: navigationHeight + 'px' }">
         <header class="app-nav__header">
             <h3>navigation</h3>
             <button
@@ -39,8 +44,26 @@ const $emit = defineEmits(['toggle'])
 
 <style lang="scss">
 .app-nav {
+    position: fixed;
+    bottom: 0;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+    width: 100%;
+    background-color: var(--color-background);
+    transition: height 0.1s ease-out;
+
+    @media (width > 768px) {
+        position: static;
+        grid-row: 2;
+        grid-column: 1;
+        /* stylelint-disable-next-line declaration-no-important */
+        height: 100% !important;
+    }
+
+    &.visible {
+        height: 100%;
+    }
 
     &__header {
         display: flex;

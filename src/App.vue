@@ -43,27 +43,6 @@ const changeVisibility = val => {
     grid-column: 1 / 3;
 }
 
-.app-nav {
-    position: fixed; /* фиксированное позиционирование для навигации */
-    width: 100%; /* на всю ширину экрана */
-    height: 100%; /* выдвигается на всю высоту экрана */
-    background-color: var(--color-background);
-    transition: transform 0.2s ease-in-out; /* плавное выдвижение */
-    transform: translateY(calc(100% - 60px)); /* изначально скрыта за пределами экрана */
-    inset: 0;
-
-    @media (width > 768px) {
-        position: static;
-        grid-row: 2;
-        grid-column: 1;
-        transform: translateY(0);
-    }
-
-    &.visible {
-        transform: translateY(0); /* отображается на экране */
-    }
-}
-
 .app-main {
     grid-column: 1;
 
