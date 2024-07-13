@@ -88,6 +88,7 @@ const listStyles = computed(() => {
     bottom: 0;
     display: flex;
     flex-direction: column;
+    grid-row: 3;
     overflow: hidden;
     width: 100%;
     background-color: var(--color-background);
@@ -103,7 +104,7 @@ const listStyles = computed(() => {
     &__panel {
         display: flex;
         justify-content: space-between;
-        padding: 16px;
+        padding: 8px 16px;
 
         @media (width > 768px) {
             display: none;
@@ -129,7 +130,7 @@ const listStyles = computed(() => {
     }
 
     &__list-wrapper {
-        padding: 16px;
+        padding: 8px 16px;
     }
 
     &__toggle {

@@ -18,7 +18,7 @@ const routes = $router.getRoutes()
 /* stylelint-disable-next-line selector-max-id */
 #app {
     display: grid;
-    grid-template-rows: auto 1fr auto; /* header и main */
+    grid-template-rows: auto 1fr 44px; /* header и main */
     grid-template-columns: 1fr; /* Навигацию убираем из потока для мобильных */
     overflow: hidden;
     height: 100vh;

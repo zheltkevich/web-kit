@@ -11,3 +11,11 @@
         </RouterView>
     </main>
 </template>
+
+<style lang="scss">
+.app-main {
+    article {
+        padding: 8px 16px;
+    }
+}
+</style>
