@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useWindowSize } from '@vueuse/core'
+
 const props = defineProps({
     routes: {
         type: Array,
@@ -8,42 +9,45 @@ const props = defineProps({
     },
     collapsedHeight: {
         type: Number,
-        default: 60,
+        default: 28,
     },
 })
 
-const navigationVisible = ref(false)
-const toggle = () => (navigationVisible.value = !navigationVisible.value)
+const visible = ref(false)
+const toggle = val => (visible.value = val)
 
 const { height } = useWindowSize()
-const navigationStyles = computed(() => {
-    return {
-        height: navigationVisible.value ? `${height.value}px` : `${props.collapsedHeight}px`,
-    }
-})
+const navigationStyles = computed(() => ({
+    height: visible.value ? `${height.value}px` : `${props.collapsedHeight}px`,
+}))
+const listStyles = computed(() => ({
+    height: visible.value ? `${height.value - props.collapsedHeight}px` : '0',
+}))
 </script>
 
 <template>
     <aside
         class="app-nav"
         :style="navigationStyles">
-        <header class="app-nav__header">
-            <h3>navigation</h3>
-            <button
-                class="app-nav__toggle"
-                @click="toggle">
-                {{ navigationVisible ? 'hide' : 'show' }}
-            </button>
-        </header>
-        <nav class="app-nav__list">
+        <nav
+            class="app-nav__list"
+            :style="listStyles">
             <RouterLink
                 v-for="route in routes"
                 :key="route.name"
                 :to="{ name: route.name }"
-                @click="toggle">
+                @click="toggle(false)">
                 {{ route.name }}
             </RouterLink>
         </nav>
+        <div class="app-nav__panel">
+            <h3>Components</h3>
+            <button
+                class="app-nav__toggle"
+                @click="toggle(!visible)">
+                {{ visible ? 'hide' : 'show' }}
+            </button>
+        </div>
     </aside>
 </template>
 
@@ -65,17 +69,25 @@ const navigationStyles = computed(() => {
         height: 100% !important; // stylelint-disable-line declaration-no-important
     }
 
-    &__header {
+    &__panel {
         display: flex;
         justify-content: space-between;
-        padding: 16px;
+
+        @media (width > 768px) {
+            display: none;
+        }
     }
 
     &__list {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        padding: 16px;
+        overflow: hidden;
+        transition: height 0.1s ease-out;
+
+        @media (width > 768px) {
+            height: 100% !important; // stylelint-disable-line declaration-no-important
+        }
     }
 
     &__toggle {
