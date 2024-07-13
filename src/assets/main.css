@@ -2,9 +2,9 @@
 
 /* stylelint-disable-next-line selector-max-id */
 #app {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 2rem;
+    /* max-width: 1280px; */
+    margin: 0;
+    padding: 16px;
     font-weight: normal;
 }
 
@@ -19,19 +19,5 @@ a,
 @media (hover: hover) {
     a:hover {
         background-color: hsl(160 100% 37% / 0.2);
-    }
-}
-
-@media (width >= 1024px) {
-    body {
-        display: flex;
-        place-items: center;
-    }
-
-    /* stylelint-disable-next-line selector-max-id */
-    #app {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        padding: 0 2rem;
     }
 }

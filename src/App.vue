@@ -1,55 +1,20 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
 import { useRouter } from 'vue-router'
+import AppHeader from '@/components/app/AppHeader.vue'
+import AppNav from '@/components/app/AppNav.vue'
+import AppMain from '@/components/app/AppMain.vue'
 
 const $router = useRouter()
 const routes = $router.getRoutes()
 </script>
 
 <template>
-    <header>
-        <img
-            alt="Vue logo"
-            class="logo"
-            src="@/assets/logo.svg"
-            width="125"
-            height="125" />
-        <ui-button />
-        <div class="wrapper">
-            <HelloWorld msg="You did it!" />
-            <nav>
-                <RouterLink
-                    v-for="route in routes"
-                    :key="route.name"
-                    :to="{ name: route.name }">
-                    {{ route.name }}
-                </RouterLink>
-            </nav>
-        </div>
-    </header>
-
-    <RouterView />
+    <AppHeader />
+    <AppNav :routes="routes" />
+    <AppMain />
 </template>
 
-<style scoped>
-header {
-    max-height: 100vh;
-    line-height: 1.5;
-}
-
-.logo {
-    display: block;
-    margin: 0 auto 2rem;
-}
-
-nav {
-    width: 100%;
-    margin-top: 2rem;
-    font-size: 12px;
-    text-align: center;
-}
-
+<style lang="scss">
 nav a.router-link-exact-active {
     color: var(--color-text);
 }
@@ -68,29 +33,25 @@ nav a:first-of-type {
     border: 0;
 }
 
-@media (width >= 1024px) {
-    header {
-        display: flex;
-        padding-right: calc(var(--section-gap) / 2);
-        place-items: center;
-    }
+/* stylelint-disable-next-line selector-max-id */
+#app {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: auto auto 1fr;
+}
 
-    .logo {
-        margin: 0 2rem 0 0;
-    }
+.app-header {
+    grid-row: 1;
+    grid-column: 1 / span 3;
+}
 
-    header .wrapper {
-        display: flex;
-        flex-wrap: wrap;
-        place-items: flex-start;
-    }
+.app-nav {
+    grid-row: 2;
+    grid-column: 1;
+}
 
-    nav {
-        margin-top: 1rem;
-        margin-left: -1rem;
-        padding: 1rem 0;
-        font-size: 1rem;
-        text-align: left;
-    }
+.app-main {
+    grid-row: 2;
+    grid-column: 3;
 }
 </style>
