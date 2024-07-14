@@ -1,0 +1,35 @@
+:root {
+    --scrollbar-size: 12px;
+    --trs-fast: 0.1s;
+    --trs-slow: 0.3s;
+    --trs: 0.2s;
+}
+
+*:focus {
+    outline: 1px solid transparent;
+    outline-offset: -1px;
+}
+
+*:focus-visible {
+    outline: 1px solid transparent;
+    outline-offset: -1px;
+}
+
+.visually-hidden {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    white-space: nowrap;
+}
+
+.text-clamp {
+    display: inline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

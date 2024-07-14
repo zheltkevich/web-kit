@@ -1,0 +1,41 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: unset;
+    font-synthesis: none;
+    text-rendering: optimizelegibility;
+    text-size-adjust: 100%;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: unset;
+}
+
+p {
+    margin-top: unset;
+    margin-bottom: unset;
+}
+
+ul {
+    margin-top: unset;
+    margin-bottom: unset;
+    padding-left: unset;
+    list-style: none;
+}

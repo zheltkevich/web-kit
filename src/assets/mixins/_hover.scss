@@ -1,0 +1,40 @@
+@mixin hover($parent: null) {
+    @media (hover: hover) and (pointer: fine) {
+        @if $parent {
+            #{$parent}:hover & {
+                @content;
+            }
+            /* stylelint-disable-next-line at-rule-no-unknown */
+        } @else {
+            &:hover {
+                @content;
+            }
+        }
+    }
+}
+
+@mixin active($parent: null) {
+    @if $parent {
+        #{$parent}:active:not(.disabled, :disabled) & {
+            @content;
+        }
+    } @else {
+        &:active:not(.disabled, :disabled) {
+            @content;
+        }
+    }
+}
+
+@mixin disabled($parent: null) {
+    @if $parent {
+        #{$parent}.disabled &,
+        #{$parent}:disabled & {
+            @content;
+        }
+    } @else {
+        &.disabled,
+        &:disabled {
+            @content;
+        }
+    }
+}

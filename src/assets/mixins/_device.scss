@@ -1,0 +1,21 @@
+/* stylelint-disable at-rule-no-unknown */
+@use 'sass:map';
+
+$viewports: (
+    'mini': 0,
+    'mobile-s': 320px,
+    'mobile-m': 440px,
+    'mobile-l': 568px,
+    'tablet-m': 768px,
+    'tablet-l': 1024px,
+    'desktop-s': 1280px,
+    'desktop-m': 1440px,
+    'desktop-l': 1680px,
+    'desktop-xl': 1920px,
+);
+
+@mixin device($device) {
+    @media only screen and (min-width: map.get($viewports, $device)) {
+        @content;
+    }
+}

@@ -14,6 +14,11 @@
 
 <style lang="scss">
 .app-main {
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    @include scrollbar;
+
     article {
         padding: 8px 16px;
     }

@@ -1,0 +1,65 @@
+@mixin scrollbar(
+    $show-on-hover: false,
+    $track-color: transparent,
+    $thumb-color: var(--vt-c-black-mute),
+    $thumb-hover-color: var(--vt-c-black-soft),
+    $thumb-active-color: var(--vt-c-indigo),
+    $scrollbar-size: var(--scrollbar-size),
+    $hidden-corner: true
+) {
+    -webkit-overflow-scrolling: touch;
+
+    // scrollbar-color: $thumb-color;
+
+    @media (pointer: fine) {
+        @if $hidden-corner {
+            &::-webkit-scrollbar-corner {
+                display: none;
+            }
+        }
+
+        @if $show-on-hover {
+            &:hover,
+            &:focus {
+                &::-webkit-scrollbar-thumb {
+                    visibility: visible;
+                }
+            }
+        }
+
+        &::-webkit-scrollbar {
+            width: $scrollbar-size;
+            height: $scrollbar-size;
+            background-color: $track-color;
+        }
+
+        &::-webkit-scrollbar-track,
+        &::-webkit-scrollbar-corner {
+            background-color: $track-color;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border: calc(#{$scrollbar-size} / 3) solid transparent;
+            border-radius: $scrollbar-size;
+            background-color: $thumb-color;
+            background-clip: content-box;
+
+            @if $show-on-hover {
+                visibility: hidden;
+            }
+
+            &:hover {
+                border: calc(#{$scrollbar-size} / 4) solid transparent;
+                background-color: $thumb-hover-color;
+            }
+
+            &:active {
+                background-color: $thumb-active-color;
+            }
+        }
+
+        &::-webkit-scrollbar-button {
+            display: none;
+        }
+    }
+}

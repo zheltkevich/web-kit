@@ -121,8 +121,12 @@ const listStyles = computed(() => {
         display: flex;
         flex-direction: column;
         overflow: hidden;
+        overflow-x: hidden;
+        overflow-y: auto;
         box-sizing: content-box;
         transition: height 0.1s ease-out;
+
+        @include scrollbar;
 
         @media (width > 768px) {
             height: 100% !important; // stylelint-disable-line declaration-no-important
