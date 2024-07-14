@@ -1,15 +1,30 @@
 <script setup>
-defineProps({
+import { computed, reactive } from 'vue'
+import ComponentExample from '@/components/preview/ComponentExample.vue'
+const props = defineProps({
     instruction: {
         type: Object,
         required: true,
     },
 })
+
+const instruction = computed(() => {
+    return props.instruction
+})
+
+const attrs = reactive(props.instruction.attrs)
+// const controls = reactive(props.instruction.controls)
 </script>
 
 <template>
     <article class="component-view">
-        {{ instruction }}
+        <h1>{{ instruction.title }}</h1>
+        <hr />
+        {{ attrs }}
+        <ComponentExample
+            :attrs="attrs"
+            :template="props.instruction.template" />
+        <button @click="attrs.disabled = !attrs.disabled">Toggle disabled</button>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum error veritatis aut
         aperiam maxime delectus, ratione laboriosam? Sint, eligendi? Ut odio pariatur mollitia ab
         quas? Magni mollitia dolor sit fugiat numquam eveniet distinctio architecto veritatis modi,
