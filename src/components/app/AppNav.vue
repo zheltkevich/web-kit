@@ -123,7 +123,6 @@ const listStyles = computed(() => {
         overflow: hidden;
         overflow-x: hidden;
         overflow-y: auto;
-        box-sizing: content-box;
         transition: height 0.1s ease-out;
 
         @include scrollbar;
