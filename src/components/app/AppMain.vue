@@ -2,7 +2,9 @@
 
 <template>
     <main class="app-main">
-        <RouterView v-slot="{ Component }">
+        <RouterView
+            :key="$route.fullPath"
+            v-slot="{ Component }">
             <keep-alive>
                 <component :is="Component">
                     {{ Component }}

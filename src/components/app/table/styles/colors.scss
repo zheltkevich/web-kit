@@ -1,0 +1,10 @@
+.app-table {
+    --app-table-head-color: var(--fg-soft);
+    --app-table-body-color: var(--fg-default);
+    --app-table-border-color: var(--border-muted);
+    --app-table-head-bg: var(--bg-surface_2);
+    --app-table-body-row-odd-bg: var(--bg-surface_1);
+    --app-table-body-row-even-bg: var(--bg-surface_2);
+    --app-table-body-row-bg-hover: var(--accent-bg-soft);
+    --app-table-body-row-bg-selected: var(--accent-bg-active);
+}

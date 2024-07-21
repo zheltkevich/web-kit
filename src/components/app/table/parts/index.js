@@ -1,0 +1,6 @@
+export { default as AppTableColgroup } from './AppTableColgroup.vue'
+export { default as AppTableCol } from './AppTableCol.vue'
+export { default as AppTableRow } from './AppTableRow.vue'
+export { default as AppTableHeadRow } from './AppTableHeadRow.vue'
+export { default as AppTableBodyRow } from './AppTableBodyRow.vue'
+export { default as AppTableCell } from './AppTableCell.vue'

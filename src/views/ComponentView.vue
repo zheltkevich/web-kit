@@ -1,6 +1,9 @@
 <script setup>
-import { computed, reactive } from 'vue'
+import { computed, reactive, provide } from 'vue'
+import Instruction from '@/js/Instruction.js'
 import ComponentExample from '@/components/preview/ComponentExample.vue'
+import ComponentSettings from '@/components/preview/ComponentSettings.vue'
+
 const props = defineProps({
     instruction: {
         type: Object,
@@ -8,74 +11,23 @@ const props = defineProps({
     },
 })
 
-const instruction = computed(() => {
+const inst = computed(() => {
     return props.instruction
 })
 
-const attrs = reactive(props.instruction.attrs)
-// const controls = reactive(props.instruction.controls)
+const component = reactive(new Instruction(inst.value))
+
+provide('component', component)
 </script>
 
 <template>
     <article class="component-view">
-        <h1>{{ instruction.title }}</h1>
+        <h1>{{ component.title }}</h1>
         <hr />
-        {{ attrs }}
         <ComponentExample
-            :attrs="attrs"
-            :template="props.instruction.template" />
-        <button @click="attrs.disabled = !attrs.disabled">Toggle disabled</button>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum error veritatis aut
-        aperiam maxime delectus, ratione laboriosam? Sint, eligendi? Ut odio pariatur mollitia ab
-        quas? Magni mollitia dolor sit fugiat numquam eveniet distinctio architecto veritatis modi,
-        in quod autem possimus iure aut natus tenetur molestiae porro! Consectetur alias perferendis
-        adipisci deleniti voluptatem rerum modi architecto, vitae nesciunt a neque error blanditiis
-        laudantium rem expedita, beatae commodi veritatis, doloremque porro excepturi id quibusdam
-        sapiente eveniet. Libero, quia? Beatae consequatur numquam optio. In magni, recusandae ut
-        accusamus officia placeat odit ullam perspiciatis, rerum facere dolorum at deserunt, ipsa
-        porro incidunt maiores vitae inventore soluta voluptatem error aspernatur? Cumque odio quam
-        dicta! Voluptate laborum delectus velit vel minima, quidem, earum sunt impedit quisquam quod
-        pariatur veritatis excepturi unde ex deleniti necessitatibus eos tenetur rem tempora sequi,
-        consequatur ab! Est quam blanditiis fuga laboriosam! Veniam explicabo nam voluptatem sed
-        odit repudiandae reprehenderit atque cupiditate? Lorem ipsum dolor sit amet, consectetur
-        adipisicing elit. Dolorum error veritatis aut aperiam maxime delectus, ratione laboriosam?
-        Sint, eligendi? Ut odio pariatur mollitia ab quas? Magni mollitia dolor sit fugiat numquam
-        eveniet distinctio architecto veritatis modi, in quod autem possimus iure aut natus tenetur
-        molestiae porro! Consectetur alias perferendis adipisci deleniti voluptatem rerum modi
-        architecto, vitae nesciunt a neque error blanditiis laudantium rem expedita, beatae commodi
-        veritatis, doloremque porro excepturi id quibusdam sapiente eveniet. Libero, quia? Beatae
-        consequatur numquam optio. In magni, recusandae ut accusamus officia placeat odit ullam
-        perspiciatis, rerum facere dolorum at deserunt, ipsa porro incidunt maiores vitae inventore
-        soluta voluptatem error aspernatur? Cumque odio quam dicta! Voluptate laborum delectus velit
-        vel minima, quidem, earum sunt impedit quisquam quod pariatur veritatis excepturi unde ex
-        deleniti necessitatibus eos tenetur rem tempora sequi, consequatur ab! Est quam blanditiis
-        fuga laboriosam! Veniam explicabo nam voluptatem sed odit repudiandae reprehenderit atque
-        cupiditate? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum error
-        veritatis aut aperiam maxime delectus, ratione laboriosam? Sint, eligendi? Ut odio pariatur
-        mollitia ab quas? Magni mollitia dolor sit fugiat numquam eveniet distinctio architecto
-        veritatis modi, in quod autem possimus iure aut natus tenetur molestiae porro! Consectetur
-        alias perferendis adipisci deleniti voluptatem rerum modi architecto, vitae nesciunt a neque
-        error blanditiis laudantium rem expedita, beatae commodi veritatis, doloremque porro
-        excepturi id quibusdam sapiente eveniet. Libero, quia? Beatae consequatur numquam optio. In
-        magni, recusandae ut accusamus officia placeat odit ullam perspiciatis, rerum facere dolorum
-        at deserunt, ipsa porro incidunt maiores vitae inventore soluta voluptatem error aspernatur?
-        Cumque odio quam dicta! Voluptate laborum delectus velit vel minima, quidem, earum sunt
-        impedit quisquam quod pariatur veritatis excepturi unde ex deleniti necessitatibus eos
-        tenetur rem tempora sequi, consequatur ab! Est quam blanditiis fuga laboriosam! Veniam
-        explicabo nam voluptatem sed odit repudiandae reprehenderit atque cupiditate? Lorem ipsum
-        dolor sit amet, consectetur adipisicing elit. Dolorum error veritatis aut aperiam maxime
-        delectus, ratione laboriosam? Sint, eligendi? Ut odio pariatur mollitia ab quas? Magni
-        mollitia dolor sit fugiat numquam eveniet distinctio architecto veritatis modi, in quod
-        autem possimus iure aut natus tenetur molestiae porro! Consectetur alias perferendis
-        adipisci deleniti voluptatem rerum modi architecto, vitae nesciunt a neque error blanditiis
-        laudantium rem expedita, beatae commodi veritatis, doloremque porro excepturi id quibusdam
-        sapiente eveniet. Libero, quia? Beatae consequatur numquam optio. In magni, recusandae ut
-        accusamus officia placeat odit ullam perspiciatis, rerum facere dolorum at deserunt, ipsa
-        porro incidunt maiores vitae inventore soluta voluptatem error aspernatur? Cumque odio quam
-        dicta! Voluptate laborum delectus velit vel minima, quidem, earum sunt impedit quisquam quod
-        pariatur veritatis excepturi unde ex deleniti necessitatibus eos tenetur rem tempora sequi,
-        consequatur ab! Est quam blanditiis fuga laboriosam! Veniam explicabo nam voluptatem sed
-        odit repudiandae reprehenderit atque cupiditate?
+            :attrs="component.default"
+            :template="component.template" />
+        <ComponentSettings />
     </article>
 </template>
 
